@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MailSender.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MailSender"
+    xmlns:view="clr-namespace:MailSender.Views"
+    Shell.FlyoutBehavior="Disabled"
+    Title="Levélküldő">
+
+    <TabBar>
+        <Tab Title="Üzenet">
+            <ShellContent ContentTemplate="{DataTemplate view:MailPage}" />
+        </Tab>
+
+        <Tab Title="Napló">
+            <ShellContent ContentTemplate="{DataTemplate view:LogPage}" />
+        </Tab>
+    </TabBar>
+
+</Shell>
