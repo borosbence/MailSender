@@ -60,16 +60,15 @@ namespace MailSender.ViewModels
             await Task.Delay(1000);
             if (!string.IsNullOrWhiteSpace(From) && !string.IsNullOrWhiteSpace(To))
             {
+                string[] fromArray = GetDisplayName(From);
                 string[] addresses = To.Split(';');
                 foreach (var address in addresses)
                 {
-                    string[] toTextArray = address.Split(' ');
-                    string toAddress = toTextArray[0];
-                    string? toName = toTextArray.Length > 0 ? string.Join(" ", toTextArray.Skip(1)) : null;
+                    string[] toArray = GetDisplayName(address);
                     try
                     {
-                        await _emailService.SendEmailAsync(toAddress, Subject, Body, From, toName);
-                        _logService.Append($"Sikeres üzenet küldés: {toAddress} .");
+                        await _emailService.SendEmailAsync(fromArray[0], toArray[0], Subject, Body, fromArray[1], toArray[1]);
+                        _logService.Append($"Sikeres üzenet küldés: {toArray[0]} .");
                     }
                     catch (Exception ex)
                     {
@@ -86,5 +85,12 @@ namespace MailSender.ViewModels
             Visible = true;
         }
 
+        private string[] GetDisplayName(string inputText)
+        {
+            string[] result = new string[2];
+            result[0] = inputText.Split(' ')[0];
+            result[1] = inputText.Length > 0 ? string.Join(" ", inputText.Skip(1)) : string.Empty;
+            return result;
+        }
     }
 }

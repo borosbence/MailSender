@@ -5,7 +5,6 @@ namespace MailSender.Services
 {
     public class EmailService
     {
-        private readonly string _fromAddress;
         private readonly SmtpClient _client;
 
         public EmailService(string userName, string password, string host, int port)
@@ -20,13 +19,12 @@ namespace MailSender.Services
                 EnableSsl = true,
                 Credentials = new NetworkCredential(userName, password)
             };
-            _fromAddress = userName;
         }
 
-        public async Task SendEmailAsync(string to, string? subject, string? body,
+        public async Task SendEmailAsync(string from, string to, string? subject, string? body,
             string? fromName = null, string? toName = null)
         {
-            MailAddress _from = new(_fromAddress, fromName);
+            MailAddress _from = new(from, fromName);
             MailAddress _to = new(to, toName);
             MailMessage mail = new()
             {
@@ -36,7 +34,6 @@ namespace MailSender.Services
                 Body = body,
                 IsBodyHtml = true
             };
-
             await _client.SendMailAsync(mail);
         }
     }

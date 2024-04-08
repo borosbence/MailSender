@@ -9,17 +9,16 @@
         private const int PORT = 587;
 
         [TestMethod()]
-        public async Task SendMailAsyncTest()
+        public async Task SendEmailAsyncTest()
         {
-
             var emailService = new EmailService(USERNAME, PASSWORD, HOST, PORT);
             try
             {
-                string to = "CÍMZETT";
+                string from = "KÜLDŐ EMAIL";
+                string to = "CÍMZETT EMAIL";
                 string subject = "TÁRGY";
                 string body = "<h1>Hello Világ</h1>";
-                string fromName = "KÜLDŐ NEVE";
-                await emailService.SendEmailAsync(to, subject, body, fromName);
+                await emailService.SendEmailAsync(from, to, subject, body);
             }
             catch (Exception ex)
             {
