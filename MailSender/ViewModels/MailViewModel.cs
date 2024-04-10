@@ -88,8 +88,9 @@ namespace MailSender.ViewModels
         private string[] GetDisplayName(string inputText)
         {
             string[] result = new string[2];
-            result[0] = inputText.Split(' ')[0];
-            result[1] = inputText.Length > 0 ? string.Join(" ", inputText.Skip(1)) : string.Empty;
+            string[] inputArray = inputText.Split(' ');
+            result[0] = inputArray[0];
+            result[1] = inputArray.Length > 0 ? string.Join(" ", inputText.Skip(1)) : string.Empty;
             return result;
         }
     }

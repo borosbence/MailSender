@@ -6,7 +6,7 @@
 
         public void Append(string text)
         {
-            Logs.Add(text);
+            Logs.Add($"{DateTime.Now} : {text}");
         }
     }
 }
